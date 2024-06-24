@@ -12,16 +12,14 @@ class DirectoryTree {
       console.log(`CREATE ${args[0]}`);
     } else if (action === 'MOVE') {
       const [source, destination] = args;
+      console.log(`MOVE ${source} ${destination}`);
       if (!this.root.move(source, destination)) {
         console.log(`Cannot move ${source} to ${destination} - invalid path`);
-      } else {
-        console.log(`MOVE ${source} ${destination}`);
       }
     } else if (action === 'DELETE') {
+      console.log(`DELETE ${args[0]}`);
       if (!this.root.delete(args[0])) {
         console.log(`Cannot delete ${args[0]} - ${args[0]} does not exist`);
-      } else {
-        console.log(`DELETE ${args[0]}`);
       }
     } else if (action === 'LIST') {
       console.log('LIST');

@@ -50,7 +50,6 @@ class Directory {
       delete parentDir.subdirectories[dirToDelete];
       return true;
     }
-    console.log('REGULAR DELETE');
     console.log(`Cannot delete ${path} - ${path} does not exist`);
     return false;
   }

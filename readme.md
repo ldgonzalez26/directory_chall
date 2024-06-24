@@ -11,19 +11,20 @@ This project is a solution to the Directory Tree Challenge, which involves creat
 ## Setup
 
 1. Clone the repository
-2. Run npm install
+2. Run `npm install`
 3. Run the script using the following command `node main.js`
 
 
 # TEST
 In order to run test run the following command (make sure to have run npm install first)
-1. npm test
+1. `npm test`
 
 # NOTES
 
 1. If you want to run something diff please make sure to change 'commands'.
 2. Not specified on create scenario what would happen if we try to create a folder that already exist. ( the following code would be able to handle this with some other minor changes )
    
+   ```javascript
     create(path) {
         const parts = path.split('/');
         let current = this;
@@ -38,4 +39,3 @@ In order to run test run the following command (make sure to have run npm instal
         current = current.subdirectories[part];
         }
     }
-3. 

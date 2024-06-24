@@ -21,7 +21,7 @@ In order to run test run the following command (make sure to have run npm instal
 
 # NOTES
 
-1. If you want to run something diff please make sure to change 'commands'.
+1. If you want to run something diff please make sure to change 'commands.txt'.
 2. Not specified on create scenario what would happen if we try to create a folder that already exist. ( the following code would be able to handle this with some other minor changes )
    
    ```javascript

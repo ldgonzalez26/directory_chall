@@ -1,0 +1,17 @@
+{
+  "name": "javascript_chall",
+  "version": "1.0.0",
+  "description": "javascript chall project",
+  "main": "main.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "luis gonzalez",
+  "license": "ISC",
+  "dependencies": {
+    "jest": "^29.7.0"
+  }
+}

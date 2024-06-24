@@ -1,5 +1,4 @@
 const fs = require('fs');
-// Read commands from a text file
 const readCommands = (filePath) => {
   try {
     const data = fs.readFileSync(filePath, 'utf8');

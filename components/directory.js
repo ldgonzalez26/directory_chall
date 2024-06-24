@@ -38,8 +38,10 @@ class Directory {
 
   delete(path) {
     const parts = path.split('/');
-    const parentDir = this.getDirectory(parts.slice(0, -1).join('/'));
+    const parentPath = parts.slice(0, -1).join('/');
+    const parentDir = this.getDirectory(parentPath);
     if (!parentDir) {
+      console.log(`Cannot delete ${path} - ${parentPath} does not exist`);
       return false;
     }
 
@@ -48,6 +50,8 @@ class Directory {
       delete parentDir.subdirectories[dirToDelete];
       return true;
     }
+    console.log('REGULAR DELETE');
+    console.log(`Cannot delete ${path} - ${path} does not exist`);
     return false;
   }
 

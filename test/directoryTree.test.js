@@ -66,4 +66,18 @@ describe('Directory Tree', () => {
       ]
     );
   });
+  test('Unknown command', () => {
+    runTest(
+      ['CREATE fruits', 'CREATE vegetables', 'EAT fruits', 'LIST'],
+      [
+        'CREATE fruits',
+        'CREATE vegetables',
+        'ONLY CREATE, DELETE , MOVE , LIST ACTIONS ARE ACCEPTED',
+        'Unknown action: EAT',
+        'LIST',
+        'fruits',
+        'vegetables',
+      ]
+    );
+  });
 });

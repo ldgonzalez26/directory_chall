@@ -38,6 +38,13 @@ describe('Directory Tree', () => {
     );
   });
 
+  test('MOVE command to root', () => {
+    runTest(
+      ['CREATE fruits', 'CREATE fruits/apples', 'MOVE fruits/apples root', 'LIST'],
+      ['CREATE fruits', 'CREATE fruits/apples', 'MOVE fruits/apples root', 'LIST', 'apples', 'fruits']
+    );
+  });
+
   test('DELETE command', () => {
     runTest(
       ['CREATE fruits', 'CREATE fruits/apples', 'DELETE fruits/apples', 'LIST'],
@@ -66,18 +73,54 @@ describe('Directory Tree', () => {
       ]
     );
   });
-  test('Unknown command', () => {
+
+  test('CREATE command with leading, trailing, and multiple spaces', () => {
     runTest(
-      ['CREATE fruits', 'CREATE vegetables', 'EAT fruits', 'LIST'],
+      ['   CREATE fruits', 'CREATE   fruits/apples', 'CREATE fruits/apples  ', 'CREATE    fruits/apples/fuji', 'LIST   '],
+      ['CREATE fruits', 'CREATE fruits/apples', 'CREATE fruits/apples', 'CREATE fruits/apples/fuji', 'LIST', 'fruits', 'apples', 'fuji']
+    );
+  });
+
+  test('MOVE command with leading, trailing, and multiple spaces', () => {
+    runTest(
+      ['CREATE fruits', 'CREATE vegetables', 'CREATE fruits/apples', '  MOVE fruits/apples  vegetables  ', 'LIST  '],
+      ['CREATE fruits', 'CREATE vegetables', 'CREATE fruits/apples', 'MOVE fruits/apples vegetables', 'LIST', 'fruits', 'vegetables', 'apples']
+    );
+  });
+
+  test('MOVE command to root with leading, trailing, and multiple spaces', () => {
+    runTest(
+      ['CREATE fruits', 'CREATE fruits/apples', '  MOVE fruits/apples  root', 'LIST  '],
+      ['CREATE fruits', 'CREATE fruits/apples', 'MOVE fruits/apples root', 'LIST', 'apples', 'fruits']
+    );
+  });
+
+  test('DELETE command with leading, trailing, and multiple spaces', () => {
+    runTest(
+      ['CREATE fruits', 'CREATE fruits/apples', '  DELETE fruits/apples  ', 'LIST  '],
+      ['CREATE fruits', 'CREATE fruits/apples', 'DELETE fruits/apples', 'LIST', 'fruits']
+    );
+  });
+
+  test('Unknown command with leading, trailing, and multiple spaces', () => {
+    runTest(
+      ['CREATE fruits', 'CREATE vegetables', '   INTRODUCE fruits   ', 'LIST'],
       [
         'CREATE fruits',
         'CREATE vegetables',
-        'ONLY CREATE, DELETE , MOVE , LIST ACTIONS ARE ACCEPTED',
-        'Unknown action: EAT',
+        'ONLY CREATE, DELETE, MOVE, LIST COMMANDS ARE ACCEPTED',
+        'Unknown command: INTRODUCE fruits',
         'LIST',
         'fruits',
         'vegetables',
       ]
+    );
+  });
+
+  test('MOVE command missing destination', () => {
+    runTest(
+      ['CREATE fruits', 'CREATE fruits/apples', 'MOVE fruits/apples', 'LIST'],
+      ['CREATE fruits', 'CREATE fruits/apples', 'MOVE fruits/apples root', 'LIST', 'apples', 'fruits']
     );
   });
 });
